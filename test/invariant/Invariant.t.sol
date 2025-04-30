@@ -8,7 +8,7 @@ import { PoolFactory } from "../../src/PoolFactory.sol";
 import { TSwapPool } from "../../src/TSwapPool.sol";
 import {Handler} from "./Handler.t.sol";
 
-contract Invariant is StdInvariant {
+contract Invariant is Test {
     // these pool have 2 assets
     ERC20Mock poolToken;
     ERC20Mock weth;
@@ -46,10 +46,12 @@ contract Invariant is StdInvariant {
         targetContract(address(handler));
     }
 
-    function statefulFuzz_constantProductFormulaStaysTheSame() public {
-        // assert() // ????
-        // The change in the pool size of WETH should follow this function:
+ 
+    function invariant_constantProductFormulaStaysTheSameX() public{
+        assertEq(handler.actualDeltaX(),handler.expectedDeltaX());
+    }
 
-        assert(handler.actualDeltaX() == handler.expectedDeltaX());
+    function invariant_constantProductFormulaStaysTheSameY() public{
+        assertEq(handler.actualDeltaY(),handler.expectedDeltaY());  
     }
 }

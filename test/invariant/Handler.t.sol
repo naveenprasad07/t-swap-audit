@@ -41,7 +41,7 @@ contract Handler is Test {
         }
         startingY = int256(weth.balanceOf(address(pool)));
         startingX = int256(poolToken.balanceOf(address(pool)));
-        expectedDeltaY =-int256(outputWeth);
+        expectedDeltaY = -int256(outputWeth);
         expectedDeltaX = int256(poolTokenAmount);
         if (poolToken.balanceOf(swapper) < poolTokenAmount) {
             poolToken.mint(swapper, poolTokenAmount - poolToken.balanceOf(swapper) + 1);
@@ -52,7 +52,7 @@ contract Handler is Test {
         pool.swapExactOutput(poolToken, weth, outputWeth, uint64(block.timestamp));
         vm.stopPrank();
 
-         // actual
+        // actual
         uint256 endingY = weth.balanceOf(address(pool));
         uint256 endingX = poolToken.balanceOf(address(pool));
 
